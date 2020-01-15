@@ -17,21 +17,26 @@ export default {
 
 <style>
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,700");
-
 body {
   background-color: #eee;
   font-family: "Montserrat", sans-serif;
-  display: grid;
-  grid-template-rows: auto;
-  justify-items: center;
-  align-items: center;
+  /* display; flex along with setting auto margin for flex item causes it to be centered */
+  display: flex;
+  margin: 0;
+  padding: 2rem;
 }
+
 body,
 html {
-  margin: 0;
   height: 100%;
 }
+
 #app {
   width: 50%;
+  margin: auto;
+}
+
+* {
+  box-sizing: border-box;
 }
 </style>
