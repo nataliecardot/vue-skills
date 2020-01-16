@@ -2,7 +2,18 @@
   <div class="hello">
     <div class="holder">
       <form @submit.prevent="addSkill">
-        <input type="text" placeholder="Enter a skill you have..." v-model="skill" />
+        <input
+          type="text"
+          placeholder="Enter a skill you have..."
+          v-model="skill"
+          v-validate="'min:2'"
+          name="skill"
+        />
+        <!-- errors object is created by vee-validate -->
+        <!-- errors.first is to display one error at a time for fields -->
+        <p class="alert" v-if="errors.has('skill')">
+          {{ errors.first('skill') }}
+        </p>
       </form>
 
       <ul>
@@ -16,17 +27,21 @@
 
 <script>
 export default {
-  name: "Skills",
+  name: 'Skills',
   data() {
     return {
-      skill: "",
-      skills: [{ skill: "Vue.js" }, { skill: "React" }]
+      skill: '',
+      skills: [{ skill: 'Vue.js' }, { skill: 'React' }]
     };
   },
   methods: {
     addSkill() {
-      this.skills.push({ skill: this.skill });
-      this.skill = "";
+      this.$validator.validateAll().then(result => {
+        if (result) {
+          this.skills.push({ skill: this.skill });
+          this.skill = '';
+        }
+      });
     }
   }
 };
@@ -70,5 +85,15 @@ input {
   font-size: 1.3rem;
   background-color: #323333;
   color: #687f7f;
+}
+
+p.alert {
+  background: #fdf2ce;
+  font-weight: bold;
+  /* Compared to display: inline, the major difference is that display: inline-block allows to set a width and height on the element */
+  /* with display: inline-block, the top and bottom margins/paddings are respected, but with display: inline they are not */
+  display: inline-block;
+  padding: 5px;
+  margin-top: -20px;
 }
 </style>
