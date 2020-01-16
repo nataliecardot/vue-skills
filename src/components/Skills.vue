@@ -9,15 +9,29 @@
           v-validate="'min:2'"
           name="skill"
         />
-        <!-- errors object is created by vee-validate -->
-        <!-- errors.first is to display one error at a time for fields -->
-        <p class="alert" v-if="errors.has('skill')">
-          {{ errors.first('skill') }}
-        </p>
+
+        <!-- Custom animations prefixed by alert-in class are being overridden by imported Animate.css animations flipInX and flipOutX -->
+        <transition
+          name="alert-in"
+          enter-active-class="animated flipInX"
+          leave-active-class="animated flipOutX"
+        >
+          <!-- errors object is created by vee-validate -->
+          <!-- errors.first is to display one error at a time for fields -->
+          <p class="alert" v-if="errors.has('skill')">
+            {{ errors.first('skill') }}
+          </p>
+        </transition>
       </form>
 
       <ul>
-        <li v-for="(data, index) in skills" :key="index">{{ data.skill }}</li>
+        <transition-group
+          name="list"
+          enter-active-class="animated bounceInUp"
+          leave-active-class="animated bounceOutDown"
+        >
+          <li v-for="(data, index) in skills" :key="index">{{ data.skill }}</li>
+        </transition-group>
       </ul>
 
       <p>These are the skills that you possess.</p>
@@ -48,6 +62,8 @@ export default {
 </script>
 
 <style scoped>
+@import 'https://cdn.jsdelivr.net/npm/animate.css@3.5.1';
+
 .holder {
   background: #fff;
 }
@@ -95,5 +111,25 @@ p.alert {
   display: inline-block;
   padding: 5px;
   margin-top: -20px;
+}
+
+.alert-in-enter-active {
+  animation: bounce-in 0.5s;
+}
+
+.alert-in-leave-active {
+  animation: bounce-in 0.5s reverse;
+}
+
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 </style>
