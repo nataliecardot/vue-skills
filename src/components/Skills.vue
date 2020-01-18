@@ -46,7 +46,7 @@ export default {
   data() {
     return {
       skill: "",
-      skills: [{ skill: "Vue.js" }, { skill: "React" }]
+      skills: [{ skill: "Vue" }, { skill: "React" }, { skill: "Node.js" }]
     };
   },
   methods: {
