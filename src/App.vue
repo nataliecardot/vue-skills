@@ -28,7 +28,6 @@ body {
   font-family: 'Montserrat', sans-serif;
   /* display: grid (or flex) along with setting auto margin for flex item causes it to be centered */
   display: grid;
-  /* justify-items: center; */
   margin: 0;
 }
 
