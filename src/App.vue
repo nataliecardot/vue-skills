@@ -11,13 +11,8 @@
 </template>
 
 <script>
-import Skills from './components/Skills.vue';
-
 export default {
-  name: 'app',
-  components: {
-    Skills
-  }
+  name: 'app'
 };
 </script>
 
@@ -31,10 +26,10 @@ export default {
 body {
   background-color: #eee;
   font-family: 'Montserrat', sans-serif;
-  /* display; flex along with setting auto margin for flex item causes it to be centered */
+  /* display: grid (or flex) along with setting auto margin for flex item causes it to be centered */
   display: grid;
-  justify-items: center;
-  padding-top: 50px;
+  /* justify-items: center; */
+  margin: 0;
 }
 
 body,
@@ -52,11 +47,12 @@ nav {
 }
 
 nav a {
-  padding: 10px;
+  padding: 0.8rem;
   text-decoration: none;
   background: #fff;
   border-radius: 3px;
   color: rgb(0, 110, 255);
+  font-weight: bolder;
   margin-right: 15px;
 }
 </style>

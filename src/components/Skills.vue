@@ -30,7 +30,7 @@
           enter-active-class="animated bounceInUp"
           leave-active-class="animated bounceOutDown"
         >
-          <li v-for="(data, index) in skills" :key="index">{{ data.skill }}</li>
+          <li v-for="(item, index) in skills" :key="index">{{ item.skill }}</li>
         </transition-group>
       </ul>
 
@@ -75,8 +75,8 @@ ul {
 }
 
 ul li {
-  padding: 20px;
-  font-size: 1.3em;
+  padding: 1.3rem;
+  font-size: 1.3rem;
   background-color: #e0edf4;
   border-left: 5px solid #3eb3f6;
   margin-bottom: 2px;
@@ -85,7 +85,7 @@ ul li {
 
 p {
   text-align: center;
-  padding: 30px 0;
+  padding: 2rem 0;
   color: gray;
   margin-top: 0;
 }
