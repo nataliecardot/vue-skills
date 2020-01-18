@@ -18,9 +18,7 @@
         >
           <!-- errors object is created by vee-validate -->
           <!-- errors.first is to display one error at a time for fields -->
-          <p class="alert" v-if="errors.has('skill')">
-            {{ errors.first('skill') }}
-          </p>
+          <p class="alert" v-if="errors.has('skill')">{{ errors.first('skill') }}</p>
         </transition>
       </form>
 
@@ -30,7 +28,10 @@
           enter-active-class="animated bounceInUp"
           leave-active-class="animated bounceOutDown"
         >
-          <li v-for="(item, index) in skills" :key="index">{{ item.skill }}</li>
+          <li v-for="(item, index) in skills" :key="index">
+            {{ item.skill }}
+            <i class="far fa-trash-alt" v-on:click="remove(index)"></i>
+          </li>
         </transition-group>
       </ul>
 
@@ -41,11 +42,11 @@
 
 <script>
 export default {
-  name: 'Skills',
+  name: "Skills",
   data() {
     return {
-      skill: '',
-      skills: [{ skill: 'Vue.js' }, { skill: 'React' }]
+      skill: "",
+      skills: [{ skill: "Vue.js" }, { skill: "React" }]
     };
   },
   methods: {
@@ -53,16 +54,20 @@ export default {
       this.$validator.validateAll().then(result => {
         if (result) {
           this.skills.push({ skill: this.skill });
-          this.skill = '';
+          this.skill = "";
         }
       });
+    },
+    remove(id) {
+      this.skills.splice(id, 1);
     }
   }
 };
 </script>
 
 <style scoped>
-@import 'https://cdn.jsdelivr.net/npm/animate.css@3.5.1';
+@import "https://cdn.jsdelivr.net/npm/animate.css@3.5.1";
+/* @import "https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"; */
 
 .holder {
   background: #fff;
@@ -131,5 +136,11 @@ p.alert {
   100% {
     transform: scale(1);
   }
+}
+
+i {
+  float: right;
+  color: #616161;
+  cursor: pointer;
 }
 </style>
