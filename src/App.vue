@@ -44,7 +44,7 @@ html {
 }
 
 nav {
-  padding: 20px 20px 20px 0;
+  padding: 1.5rem 1.5rem 1.5rem 0;
 }
 
 nav a {
@@ -54,7 +54,7 @@ nav a {
   border-radius: 3px;
   color: rgb(0, 110, 255);
   font-weight: bolder;
-  margin-right: 15px;
+  margin-right: 1rem;
 }
 
 @media screen and (max-width: 767px) {
