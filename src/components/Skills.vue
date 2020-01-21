@@ -18,7 +18,9 @@
         >
           <!-- errors object is created by vee-validate -->
           <!-- errors.first is to display one error at a time for fields -->
-          <p class="alert" v-if="errors.has('skill')">{{ errors.first('skill') }}</p>
+          <p class="alert" v-if="errors.has('skill')">
+            {{ errors.first('skill') }}
+          </p>
         </transition>
       </form>
 
@@ -28,7 +30,9 @@
           enter-active-class="animated bounceInUp"
           leave-active-class="animated bounceOutDown"
         >
-          <li v-for="(item, index) in skills" :key="index">
+          <!-- To give Vue a hint so that it can track each node’s identity, and thus reuse and reorder existing elements, you need to provide a unique key attribute for each item -->
+          <!-- It's bad practice to use an index as a key since arrays are mutable, and the index of any given item can and will change if items are added to or removed from the array; using uuidv4 to generate random string -->
+          <li v-for="(item, index) in skills" :key="item.uuid">
             {{ item.skill }}
             <i class="far fa-trash-alt" v-on:click="remove(index)"></i>
           </li>
@@ -41,20 +45,26 @@
 </template>
 
 <script>
+import { uuid } from 'vue-uuid';
+
 export default {
-  name: "Skills",
+  name: 'Skills',
   data() {
     return {
-      skill: "",
-      skills: [{ skill: "Vue" }, { skill: "React" }, { skill: "Node.js" }]
+      skill: '',
+      skills: [
+        { uuid: uuid.v4(), skill: 'Vue' },
+        { uuid: uuid.v4(), skill: 'React' },
+        { uuid: uuid.v4(), skill: 'Node.js' }
+      ]
     };
   },
   methods: {
     addSkill() {
       this.$validator.validateAll().then(result => {
         if (result) {
-          this.skills.push({ skill: this.skill });
-          this.skill = "";
+          this.skills.push({ uuid: uuid.v4(), skill: this.skill });
+          this.skill = '';
         }
       });
     },
@@ -66,7 +76,7 @@ export default {
 </script>
 
 <style scoped>
-@import "https://cdn.jsdelivr.net/npm/animate.css@3.5.1";
+@import 'https://cdn.jsdelivr.net/npm/animate.css@3.5.1';
 /* @import "https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"; */
 
 .holder {

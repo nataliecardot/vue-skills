@@ -2,6 +2,8 @@ import Vue from 'vue';
 import App from './App.vue';
 import VeeValidate from 'vee-validate';
 import router from './router';
+import UUID from 'vue-uuid';
+Vue.use(UUID);
 
 Vue.use(VeeValidate);
 
